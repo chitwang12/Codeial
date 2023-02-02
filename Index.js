@@ -22,7 +22,7 @@ app.use('/',require('./routes'));
 app.set('view engine', 'ejs');
 app.set('views','./views');
 
-
+//Server Hit 
 app.listen(port, function(err)
 {
     if(err){
