@@ -69,7 +69,9 @@ module.exports.createSession = function(req,res)
 //Sign out and destroyying the session for the user .
 module.exports.destroySession = function(req,res)
 {
-  req.logout();
+  req.logout(function(){
+    console.log("Callback");
+  });
 
   return res.redirect('/');
 }
