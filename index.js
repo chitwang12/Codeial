@@ -6,6 +6,9 @@ const PORT = process.env.port || 8000;
 //Use Express Router 
 app.use('/', require('./routes'));
 
+//setup the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
 
 app.listen(PORT,function(err){
     if(err)
