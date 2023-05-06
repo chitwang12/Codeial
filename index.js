@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const PORT = process.env.port || 8000;
 const expressLayouts = require('express-ejs-layouts');
+const db = require('./config/mongoose');
 
 
-app.use(express.static('./'))
+app.use(express.static('./assets'));
 
 //must be before requiring the routes as the layouts have to be rendered before the routes .
 app.use(expressLayouts);
