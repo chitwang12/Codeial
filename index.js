@@ -4,8 +4,13 @@ const PORT = process.env.port || 8000;
 const expressLayouts = require('express-ejs-layouts');
 
 
-//before requiring the routes 
+app.use(express.static('./'))
+
+//must be before requiring the routes as the layouts have to be rendered before the routes .
 app.use(expressLayouts);
+//extract style and scripts from sub pages into the layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //Use Express Router 
 app.use('/', require('./routes'));
