@@ -8,4 +8,4 @@ const db = mongoose.connect('mongodb+srv://chitwan:Chitwan123@cluster0.1mg6bhi.m
    console.log('Error in connecting to Mongo-Db ' , err);
 })
 
-module.exports =db;
+module.exports = db ;
