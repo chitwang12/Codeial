@@ -1,4 +1,7 @@
-<h1>Codeial /<%=title %></h1>
+<link rel="stylesheet" href="/assets/css/home.css" />
+
+<div id="home-container"></div>
+
 <section class="feed-posts">
   <h4>Posts</h4>
   <% if (locals.user) { %>
@@ -19,7 +22,11 @@
       <% for(post of posts){ %>
       <li>
         <p>
-          <%= post.content %>
+          <% if (locals.user && locals.user.id == post.user.id){ %>
+          <small>
+            <a href="/posts/destroy/<%= post.id %>">X</a>
+          </small>
+          <% } %> <%= post.content %>
           <br />
           <small> <%= post.user.name %> </small>
         </p>
@@ -43,21 +50,21 @@
           </form>
           <% } %>
 
-            <div class="post-comments-list">
-                <ul id = "post-comments-<%= post._id  %>">
-                    <% for(comment of post.comments){%>
-                    <p>
-                        <%= comment.content %>
-                        <br>
-                        <small>
-                            <%= comment.user.name %>
-                        </small>
-                    </p>
-                   <% } %>
-
-                </ul>
-            </div>
-
+          <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id  %>">
+              <% for(comment of post.comments){%>
+              <p>
+                <% if (locals.user && locals.user.id == comment.user.id){ %>
+                <small>
+                  <a href="/comments/destroy/<%= comment.id %>">X</a>
+                </small>
+                <% } %> <%= comment.content %>
+                <br />
+                <small> <%= comment.user.name %> </small>
+              </p>
+              <% } %>
+            </ul>
+          </div>
         </div>
       </li>
       <% } %>
