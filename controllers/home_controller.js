@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/users');
 
 module.exports.home = async function(req,res){
 //    try {
@@ -24,12 +25,16 @@ try {
       }
    })
    .exec();
-   return res.render('home', {
-     title: 'Codeial | Home',
-     posts: posts,
-   });
- } catch (err) {
+  const users = await User.find({});
+
+      return res.render('home', {
+      title: 'Codeial | Home',
+      posts: posts,
+      all_users : users
+    });
+   }
+ catch (err) {
    console.log('Error in fetching posts from database', err);
    return res.redirect('back');
  }
-}
+};
