@@ -11,6 +11,8 @@ const passportLocal = require('./config/passport-local-strategy');
 const { default: mongoose } = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 //It should be done before the view getting rendered as the scss renders the file and return them to css in assets folder from there the routes , controllers take on the following !!
 app.use(sassMiddleware({
@@ -64,6 +66,9 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+//Will use the flash connect here just after the session cookies as it uses session cookies
+app.use(flash());
+app.use(customMware.setFlash);
 //Use Express Router 
 app.use('/', require('./routes'));
 
