@@ -29,6 +29,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
+app.use('/uploads',express.static(__dirname + '/uploads'));
 
 //must be before requiring the routes as the layouts have to be rendered before the routes .
 app.use(expressLayouts);

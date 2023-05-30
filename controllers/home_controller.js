@@ -16,16 +16,18 @@ module.exports.home = async function(req,res){
 
 //Doing this because we automatically populating the user while working in posts db 
 try {
-   const posts = await Post.find({})
+  //populate the user of each post
+   let posts = await Post.find({})
+   .sort('-createdAt')
    .populate('user')
    .populate({
       path : 'comments',
       populate :{
             path : 'user'
       }
-   })
-   .exec();
-  const users = await User.find({});
+   });
+
+  let users = await User.find({});
 
       return res.render('home', {
       title: 'Codeial | Home',
