@@ -8,12 +8,13 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-startegy');
 const { default: mongoose } = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
-
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 //It should be done before the view getting rendered as the scss renders the file and return them to css in assets folder from there the routes , controllers take on the following !!
 app.use(sassMiddleware({
 

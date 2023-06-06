@@ -1,0 +1,7 @@
+Steps in Node mailer 
+
+install nodemailer
+create a config file 
+create a mailer file(which will has some predefined content)
+create/ design templates to send html mailers.
+

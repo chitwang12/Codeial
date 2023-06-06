@@ -1,6 +1,6 @@
 const Comment = require('../models/comments');
 const Post = require('../models/post');
-
+const commentsMailer = require('../mailers/comments_mailer');
 module.exports.create = async function(req, res) {
     try {
       const post = await Post.findById(req.body.post).exec();
@@ -15,7 +15,19 @@ module.exports.create = async function(req, res) {
         //if the post is found now we need to attach the comment to the post from here we will do that.
         post.comments.push(comment);//this will update inside the post .
         await post.save();
-  
+        
+        comment = await comment.populate('user','name email').execPopulate();
+        commentsMailer.newComment(comment);
+
+        if(req.xhr){
+          return res.status(200).json({
+            data : {
+              comment : comment
+            },
+            message : "Post Created!!"
+          });
+        }
+        req.flash('success','Comment published!!');
         res.redirect('/');
       }
     } catch (err) {
