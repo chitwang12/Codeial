@@ -1,0 +1,4 @@
+Steps to Integrate Social Auth 
+Social/#rd party authentication 
+
+User  --> Google ---> Server--> Database
