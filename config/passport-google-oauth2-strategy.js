@@ -8,15 +8,17 @@ passport.use(new googleStrategy({
     clientID : "443989681445-ste1gfp7iid9qg7m8tqltoe6b06h61db.apps.googleusercontent.com",
     clientSecret:"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",
     callbackURL:"http://localhost:8000/users/auth/google/callback",
+    passReqToCallback:true
 },
-    function(accessToken,refreshToken,profile,done){
+    function(request,accessToken,refreshToken,profile,done){
+        console.log(profile);
         //find a user 
         User.find({email:profile.emails[0].value}).exec(function(err,user){
             if(err){
                 console.log('Error in google strategy-passport',err);
                 return;
             }
-            console.log(profile);
+          //  console.log(profile);
 
             if(user){
                 //if found , set this user as req.user
